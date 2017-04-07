@@ -3,7 +3,7 @@ import './App.css';
 
 class PokemonDetails extends Component {
   render(){
-    const {show, hide, pokemon, loading, fetched} = this.props;
+    const {hide, pokemon, loading, fetched} = this.props;
     let content;
     if(fetched){
       content =
@@ -14,9 +14,9 @@ class PokemonDetails extends Component {
     } else if (loading && !fetched) {
       content = <p>Loading the pokemon...</p>
     } else {
-      content = <div className="lol"/>
+      content = <div/>
     }
-    return (<div className={`details ${show ? 'show' : 'hide'}`}>
+    return (<div className={`details ${pokemon ? 'show' : 'hide'}`}>
               <img src={require("../public/close.svg")} onClick={hide} alt="closebtn" className="close"/>
               {content}
             </div>

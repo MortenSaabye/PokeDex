@@ -12,7 +12,7 @@ class PokeApp extends Component {
       fetched : false,
       loading : false,
       showing : false,
-      pokemon : {},
+      pokemon : [],
       pokemonLoading : false,
       pokemonFetched : false,
     };
@@ -35,25 +35,44 @@ class PokeApp extends Component {
     });
   }
   showDetails(pokemon){
-    this.setState({
-      pokemonLoading : true,
-      pokemonFetched : false,
-      showing : true
+    const statePokemon = this.state.pokemon.find(p => {
+       return p.name === pokemon.name
     });
-
-    fetch(`http://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
-    .then(response => response.json())
-    .then(response =>{
+    if(!statePokemon) {
       this.setState({
-        pokemon : response,
-        pokemonLoading : false,
-        pokemonFetched : true,
+        pokemonLoading : true,
+        pokemonFetched : false,
+        showing : true
       });
-    });
+      let pokemonArr = [...this.state.pokemon];
+      let newPokemon = {};
+      fetch(`http://pokeapi.co/api/v2/pokemon/${pokemon.name}`)
+      .then(response => response.json())
+      .then(response => {
+        pokemonArr.push(response);
+        newPokemon = response;
+      })
+      .then((_) => {
+        this.setState({
+          pokemon : pokemonArr,
+          pokemonLoading : false,
+          pokemonFetched : true,
+          showing : newPokemon,
+        });
+      });
+    } else {
+      this.setState({
+        pokemonFetched : true,
+        showing : statePokemon
+      });
+    }
   }
 
   closeDetails(){
-    this.setState({showing : false})
+    this.setState({
+      pokemonFetched : false,
+      showing : false
+    });
   }
 
   render(){
@@ -64,9 +83,8 @@ class PokeApp extends Component {
                   <Header />
                   <PokemonList species={this.state.species} showDetails={this.showDetails}/>
                   <PokemonDetails
-                    show={this.state.showing}
                     hide={this.closeDetails}
-                    pokemon={this.state.pokemon}
+                    pokemon={this.state.showing}
                     loading={this.state.pokemonLoading}
                     fetched={this.state.pokemonFetched}
                     />
