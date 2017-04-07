@@ -47,10 +47,28 @@ HTML, body{
   transition: 0.2s bottom ease-in-out;
 }
 
-.close {
+.close, .left, .right {
   position: absolute;
-  right: 20px;
-  top: 20px;
-  width: 20px;
   cursor: pointer;
+}
+.close {
+  right: 30px;
+  top: 30px;
+  height: 20px;
+  width: 20px;
+}
+.left {
+  height: 30px;
+  width: 30px;
+  left: 30px;
+  top: calc(50% - 10px);
+}
+.right {
+  height: 30px;
+  width: 30px;
+  right: 30px;
+  top: calc(50% - 10px);
+}
+.sprite {
+  width: 20%;
 }

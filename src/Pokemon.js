@@ -6,7 +6,7 @@ class Pokemon extends Component {
   render(){
     const {pokemon,id} = this.props;
     return(
-        <div className="pokemon--species" onClick={() => this.props.showDetails(pokemon)}>
+        <div className="pokemon--species" onClick={() => this.props.showDetails(pokemon.name)}>
            <div className="pokemon--species--container">
              <div className="pokemon--species--sprite">
                <img alt={pokemon.name} src={require(`../public/sprites/${id}.png`)}/>
