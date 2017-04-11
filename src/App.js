@@ -22,7 +22,8 @@ class PokeApp extends Component {
     this.left = this.left.bind(this);
     this.right = this.right.bind(this);
   }
-  componentWillMount(){
+  componentDidMount(){
+    document.addEventListener('keydown', e => this.handleEsc(e));
     this.setState({
       loading : true
     });
@@ -36,9 +37,6 @@ class PokeApp extends Component {
       });
     });
   }
-  componentDidMount(){
-    document.addEventListener('keydown', e => this.handleEsc(e))
-  }
   handleEsc(e){
     if(e.keyCode === 27){
       this.setState({
@@ -48,10 +46,13 @@ class PokeApp extends Component {
     }
   }
   showDetails(pokemon){
+    //check if the pokemon is already is state
     const statePokemon = this.state.pokemon.find(p => {
        return p.name === pokemon;
     });
     if(!statePokemon) {
+      //set loading and pass the pokemon as a string
+      //to show which pokemon is being fetched
       this.setState({
         pokemonLoading : true,
         pokemonFetched : false,
@@ -64,21 +65,25 @@ class PokeApp extends Component {
       .then(response => {
         pokemonArr.push(response);
         newPokemon = response;
-        console.log("ran");
       })
-      // eslint-disable-next-line
-      .then((_) => { this.state.showing === newPokemon.name ?
-        this.setState({
-          pokemon : pokemonArr,
-          pokemonLoading : false,
-          pokemonFetched : true,
-          showing : newPokemon,
-        }) : this.showDetails ;
+      .then((_) => {
+        //don't update state with new pokemon
+        //if user has closed modal while loading
+        if (this.state.showing) {
+          this.setState({
+            pokemon : pokemonArr,
+            pokemonLoading : false,
+            pokemonFetched : true,
+            showing : newPokemon,
+          });
+        }
       });
     } else {
+      //set showing with pokemon from state
+      //without making a new fetch
       this.setState({
+        showing : statePokemon,
         pokemonFetched : true,
-        showing : statePokemon
       });
     }
   }
