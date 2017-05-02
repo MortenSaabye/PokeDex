@@ -18,12 +18,11 @@ class PokeApp extends Component {
     };
     this.showDetails = this.showDetails.bind(this);
     this.closeDetails = this.closeDetails.bind(this);
-    this.preventClose = this.preventClose.bind(this);
-    this.left = this.left.bind(this);
-    this.right = this.right.bind(this);
+    this.handleArrow = this.handleArrow.bind(this);
+    this.handleKey = this.handleKey.bind(this);
   }
   componentDidMount(){
-    document.addEventListener('keydown', e => this.handleEsc(e));
+    document.addEventListener('keydown', e => this.handleKey(e));
     this.setState({
       loading : true
     });
@@ -37,101 +36,106 @@ class PokeApp extends Component {
       });
     });
   }
-  handleEsc(e){
-    if(e.keyCode === 27){
-      this.setState({
-        pokemonFetched : false,
-        showing : false,
-      });
+  handleKey(e){
+    switch (e.keyCode) {
+      case 27:
+        this.closeDetails();
+        break;
+      case 37:
+        this.handleArrow(this.state.showing.name, e, "left");
+        break;
+      case 39:
+        this.handleArrow(this.state.showing.name, e, "right");
+        break;
+      default:
+        return false;
     }
   }
   showDetails(pokemon){
-    //check if the pokemon is already is state
-    const statePokemon = this.state.pokemon.find(p => {
-       return p.name === pokemon;
-    });
-    if(!statePokemon) {
-      //set loading and pass the pokemon as a string
-      //to show which pokemon is being fetched
-      this.setState({
-        pokemonLoading : true,
-        pokemonFetched : false,
-        showing : pokemon,
+    if(!this.state.pokemonLoading){
+      //check if the pokemon is already is state
+      const statePokemon = this.state.pokemon.find(p => {
+         return p.name === pokemon;
       });
-      let pokemonArr = [...this.state.pokemon];
-      let newPokemon = {};
-      fetch(`http://pokeapi.co/api/v2/pokemon/${pokemon}`)
-      .then(response => response.json())
-      .then(response => {
-        pokemonArr.push(response);
-        newPokemon = response;
-      })
-      .then((_) => {
-        //don't update state with new pokemon
-        //if user has closed modal while loading
-        if (this.state.showing) {
-          this.setState({
-            pokemon : pokemonArr,
-            pokemonLoading : false,
-            pokemonFetched : true,
-            showing : newPokemon,
-          });
-        }
-      });
-    } else {
-      //set showing with pokemon from state
-      //without making a new fetch
-      this.setState({
-        showing : statePokemon,
-        pokemonFetched : true,
-      });
+      if(!statePokemon) {
+        //set loading and pass the pokemon as a string
+        //to show which pokemon is being fetched
+        this.setState({
+          pokemonLoading : true,
+          pokemonFetched : false,
+          showing : pokemon,
+        });
+        let pokemonArr = [...this.state.pokemon];
+        let newPokemon = {};
+        fetch(`http://pokeapi.co/api/v2/pokemon/${pokemon}`)
+        .then(response => response.json())
+        .then(response => {
+          pokemonArr.push(response);
+          newPokemon = response;
+        })
+        .then((_) => {
+          //don't update state with new pokemon
+          //if user has closed modal while loading
+          if (this.state.showing === newPokemon.name) {
+            this.setState({
+              pokemon : pokemonArr,
+              pokemonLoading : false,
+              pokemonFetched : true,
+              showing : newPokemon,
+            });
+          }
+        });
+      } else {
+        //set showing with pokemon from state
+        //without making a new fetch
+        this.setState({
+          showing : statePokemon,
+          pokemonFetched : true,
+        });
+      }
     }
   }
-
-  left(pokemon){
+  handleArrow(pokemon, e, dir){
     const index = this.state.species.findIndex(p => {
       return pokemon === p.name
     });
-    if(index > 0){
-      const nextPokemon = this.state.species[index-1].name;
+    let newIndex = index;
+    dir === "left" ? newIndex -= 1 : newIndex +=1;
+    if(newIndex >= 0 && (newIndex+1) < this.state.species.length){
+      const nextPokemon = this.state.species[newIndex].name;
       this.showDetails(nextPokemon)
     }
-  }
-  right(pokemon){
-    const index = this.state.species.findIndex(p => {
-      return pokemon === p.name
-    });
-    if(index+1 < this.state.species.length) {
-      const nextPokemon = this.state.species[index+1].name;
-      this.showDetails(nextPokemon)
-    }
-  }
-
-  closeDetails(){
-    this.setState({
-      pokemonFetched : false,
-      showing : false
-    });
-  }
-  preventClose(e){
     e.stopPropagation();
   }
 
+  preventClose(e){
+    e.stopPropagation();
+  }
+  closeDetails(){
+    this.setState({
+      pokemonFetched : false,
+      pokemonLoading : false,
+      showing : false
+    });
+  }
   render(){
     const {species, pokemonFetched, pokemonLoading, showing, fetched, loading} = this.state;
-    let content ;
+    let content;
     if(fetched){
-      content = <div className="pokeapp" onClick={showing ? this.closeDetails : null}>
+      content = <div className="pokeapp">
                   <Header />
-                  <PokemonList species={species} showDetails={this.showDetails}/>
+                  <PokemonList
+                    species={species}
+                    showDetails={this.showDetails}
+                    showing={showing}/>
                   <PokemonDetails
                     hide={this.closeDetails}
                     pokemon={showing}
+                    species={species}
                     loading={pokemonLoading}
                     fetched={pokemonFetched}
                     preventClose={this.preventClose}
-                    left={this.left}
-                    right={this.right}
+                    handleArrow={this.handleArrow}
                     />
                 </div>;
       } else if( loading && !fetched){
