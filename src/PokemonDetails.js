@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
+import Abilities from './Abilities';
 import ReactDOM from 'react-dom';
-import './App.css';
 
 class PokemonDetails extends Component {
 
   componentWillReceiveProps(nextProps){
     const el = ReactDOM.findDOMNode(this.refs.content);
-    console.log(el);
     const prevPokemon = this.props.pokemon.name;
     const nextPokemon = nextProps.pokemon.name || nextProps.pokemon;
     const prevIndex = this.props.species.findIndex(p => {
@@ -16,7 +15,6 @@ class PokemonDetails extends Component {
       return nextPokemon === p.name
     });
     if(prevPokemon && prevPokemon !== nextPokemon){
-      console.log(el.className);
       if(prevIndex > nextIndex ) {
         el.classList.add('move-left');
       } else if(nextIndex > prevIndex) {
@@ -27,9 +25,10 @@ class PokemonDetails extends Component {
 
   componentDidUpdate(){
     const el = ReactDOM.findDOMNode(this.refs.content);
-    setTimeout(function(){
-       el.classList.remove('move-left', 'move-right');
-    }, 150);
+    el.addEventListener('animationend', removeClass)
+    function removeClass(){
+      el.classList.remove('move-right', 'move-left');
+    }
   }
 
   render(){
@@ -40,6 +39,10 @@ class PokemonDetails extends Component {
       <div>
         <img className='sprite' src={pokemon.sprites.front_default} alt={pokemon.name}/>
         <p>{pokemon.name}</p>
+        <p>Height: {pokemon.height}</p>
+        <p>Weight: {pokemon.weight}</p>
+        <p>Base experience: {pokemon.base_experience}</p>
+        <Abilities abilities={pokemon.abilities}/>
       </div>
     } else if (loading && !fetched) {
       content = <p>{`Loading ${pokemon}`}</p>

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import PokemonList from './PokemonList';
 import PokemonDetails from './PokemonDetails';
 import Header from './Header';
-import './App.css';
 
 class PokeApp extends Component {
   constructor(props){

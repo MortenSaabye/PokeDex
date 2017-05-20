@@ -1,0 +1,12 @@
+@import "partials/_animation.scss";
+@import "partials/_pokemonDetails.scss";
+@import "partials/_pokemonList.scss";
+@import "partials/_pokemon.scss";
+HTML, body{
+  font-family : sans-serif;
+  background: #e2e1e0;
+  text-align : center;
+}
+.pokeapp{
+    padding : 16px;
+}
