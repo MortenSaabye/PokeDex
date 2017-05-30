@@ -2,15 +2,13 @@ import React, {Component} from 'react';
 
 class Abilities extends Component {
   render(){
-    const abilities = this.props.abilities;
+    const {abilities} = this.props;
     return (
-      <div>
-        <h4>Abilities</h4>
-        <ol>
+      <div className='abilities'>
+        <p>Abilities:</p>
           {abilities.map((ability, index) =>
-            <li key={index}>{ability.ability.name}</li>
+            <p className='ability'key={index}>{ability.ability.name}</p>
           )}
-        </ol>
       </div>
     )
   }

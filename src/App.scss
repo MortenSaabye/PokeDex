@@ -1,12 +1,51 @@
-@import "partials/_animation.scss";
-@import "partials/_pokemonDetails.scss";
-@import "partials/_pokemonList.scss";
-@import "partials/_pokemon.scss";
-HTML, body{
-  font-family : sans-serif;
-  background: #e2e1e0;
-  text-align : center;
+@import "partials/variables";
+@import "partials/pokemonDetails";
+@import "partials/pokemonList";
+@import "partials/pokemon";
+@import "partials/typesAbilities";
+@import "partials/basicInfo";
+@import "partials/stats";
+@import "partials/animation";
+@import "partials/moves";
+
+@font-face {
+  font-family: gameboy;
+  src:url(GameBoy.ttf);
 }
+HTML, body{
+  font-family : gameboy;
+  background: $blue;
+  text-align : center;
+  margin: 0;
+  overflow: hidden;
+}
+
 .pokeapp{
     padding : 16px;
+}
+
+.main {
+  overflow-y: scroll;
+  height: calc(100vh - 32px);
+  &::-webkit-scrollbar-thumb {
+    width: 8px;
+    border-radius: 5px;
+    padding: 2px;
+    background: $light-blue;
+  }
+  &::-webkit-scrollbar {
+    width: 10px;
+    background: $blue;
+  }
+}
+
+.loading {
+  transform: translateY(100px);
+  height: 100vh;
+  p {
+    font-size: 1.4em;
+  }
+  img {
+    width: 200px;
+  }
 }

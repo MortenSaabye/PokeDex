@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PokemonList from './PokemonList';
 import PokemonDetails from './PokemonDetails';
-import Header from './Header';
 
 class PokeApp extends Component {
   constructor(props){
@@ -52,7 +51,7 @@ class PokeApp extends Component {
   }
   showDetails(pokemon){
     if(!this.state.pokemonLoading){
-      //check if the pokemon is already is state
+      //check if the pokemon is already in state
       const statePokemon = this.state.pokemon.find(p => {
          return p.name === pokemon;
       });
@@ -100,45 +99,45 @@ class PokeApp extends Component {
     });
     let newIndex = index;
     dir === "left" ? newIndex -= 1 : newIndex +=1;
-    if(newIndex >= 0 && (newIndex+1) < this.state.species.length){
+    if(newIndex >= 0 && (newIndex+1) <= this.state.species.length){
       const nextPokemon = this.state.species[newIndex].name;
       this.showDetails(nextPokemon)
     }
     e.stopPropagation();
   }
 
-  preventClose(e){
-    e.stopPropagation();
-  }
   closeDetails(){
-    this.setState({
-      pokemonFetched : false,
-      pokemonLoading : false,
-      showing : false
-    });
+    if(this.state.showing){
+      this.setState({
+        pokemonFetched : false,
+        pokemonLoading : false,
+        showing : false
+      });
+    }
   }
   render(){
     const {species, pokemonFetched, pokemonLoading, showing, fetched, loading} = this.state;
     let content;
     if(fetched){
       content = <div className="pokeapp">
-                  <Header />
                   <PokemonList
                     species={species}
-                    showDetails={this.showDetails}
-                    showing={showing}/>
+                    showing={this.state.showing}
+                    showDetails={this.showDetails}/>
                   <PokemonDetails
                     hide={this.closeDetails}
                     pokemon={showing}
                     species={species}
                     loading={pokemonLoading}
                     fetched={pokemonFetched}
-                    preventClose={this.preventClose}
-                    handleArrow={this.handleArrow}
-                    />
+                    handleArrow={this.handleArrow}/>
                 </div>;
       } else if( loading && !fetched){
-        content = <p>The pokedex is loading ...</p>;
+        content =
+        <div className="loading">
+          <p>Loading...</p>
+          <img src={require("../public/loading.gif")} alt="hourglass"/>
+        </div>
       } else {
         content = <div/>;
       }

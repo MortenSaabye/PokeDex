@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <svg version="1.1" id="Lag_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 83.8 140.5" style="enable-background:new 0 0 83.8 140.5;" xml:space="preserve">
+	 viewBox="0 0 36 60" style="enable-background:new 0 0 36 60;" xml:space="preserve">
 <style type="text/css">
-	.st0{fill:#000;}
+	.st0{fill:#82ADE2;}
 </style>
-<g>
-	<path class="st0" d="M82.8,11l-10-10c-1.4-1.4-3.6-1.4-5,0L1,67.7c-1.4,1.4-1.4,3.6,0,5l66.7,66.7c1.4,1.4,3.6,1.4,5,0l10-10
-		c1.4-1.4,1.4-3.6,0-5L31,72.7c-1.4-1.4-1.4-3.6,0-5L82.8,16C84.2,14.7,84.2,12.5,82.8,11z"/>
+<g transform="matrix( 1, 0, 0, 1, 0,0) ">
+	<g>
+		<g id="a">
+			<path class="st0" d="M12,48h12V36H12V48 M36,48H24v12h12V48 M24,24V12H12v12H24 M0,24v12h12V24H0 M36,12V0H24v12H36z"/>
+		</g>
+	</g>
 </g>
 </svg>
