@@ -40,7 +40,7 @@ class PokemonDetails extends Component {
     }
   }
   render(){
-    const {species, handleArrow, pokemon, loading, fetched} = this.props;
+    const {species, handleArrow, pokemon, loading, fetched, hide} = this.props;
     let content;
     if(fetched){
       content =
@@ -49,6 +49,10 @@ class PokemonDetails extends Component {
           <div className="left-wrap" onClick={(e) => handleArrow(pokemon.name, e, "left")}>
             <img src={require("../public/left.svg")} alt="leftbtn"
             className={"left-arrow " + (species.findIndex(p => p.name === pokemon.name) === 0 ? "load-arrow" : "")}/>
+          </div>
+          <div className="close-wrap" onClick={() => hide()}>
+            <img src={require("../public/close.svg")} alt="closebtn"
+            className="close-btn"/>
           </div>
           <div className="right-wrap" onClick={(e) => handleArrow(pokemon.name, e, "right")}>
             <img src={require("../public/right.svg")} alt="rightbtn"

@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "babel-cli": "^6.24.1",
     "create-react-app-sass": "^1.1.0",
+    "express": "^4.15.3",
     "react-scripts": "0.9.5"
   },
   "dependencies": {
     "cancelable-fetch": "^1.0.0",
+    "mongodb": "^2.2.30",
+    "node-fetch": "^1.7.1",
     "react": "^15.4.2",
     "react-dom": "^15.4.2"
   },
@@ -15,6 +19,8 @@
     "start": "react-scripts-with-sass start",
     "build": "react-scripts-with-sass build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
-  }
+    "eject": "react-scripts eject",
+    "api": "./node_modules/.bin/babel-node ./api/api.js"
+  },
+  "proxy": "http://localhost:3001"
 }

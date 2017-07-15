@@ -21,12 +21,21 @@ HTML, body{
 }
 
 .pokeapp{
-    padding : 16px;
+    padding: 0 16px 0 16px;
+}
+@media only screen and (max-width: 1000px) {
+  .pokeapp {
+    padding: 0;
+  }
 }
 
 .main {
   overflow-y: scroll;
-  height: calc(100vh - 32px);
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: 0.2s ease-in;
   &::-webkit-scrollbar-thumb {
     width: 8px;
     border-radius: 5px;

@@ -3,7 +3,6 @@ import React, {Component} from 'react';
 class Moves extends Component {
   render(){
     const {moves} = this.props;
-    console.log(moves);
     return(
       <div className="moves">
         <p>Natural moves</p>
