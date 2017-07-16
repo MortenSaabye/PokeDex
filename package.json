@@ -1,27 +1,25 @@
 {
-  "name": "pokeDex",
-  "version": "0.1.0",
-  "private": true,
-  "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "create-react-app-sass": "^1.1.0",
-    "express": "^4.15.3",
-    "react-scripts": "0.9.5"
-  },
-  "dependencies": {
-    "cancelable-fetch": "^1.0.0",
-    "mongodb": "^2.2.30",
-    "node-fetch": "^1.7.1",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2"
-  },
+  "name": "pokedex",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "react-scripts-with-sass start",
-    "build": "react-scripts-with-sass build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "api": "./node_modules/.bin/babel-node ./api/api.js",
-    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "proxy": "http://localhost:3001"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MortenSaabye/PokeDex.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MortenSaabye/PokeDex/issues"
+  },
+  "homepage": "https://github.com/MortenSaabye/PokeDex#readme",
+  "dependencies": {
+    "express": "^4.15.3",
+    "mongodb": "^2.2.30",
+    "node-fetch": "^1.7.1"
+  }
 }
