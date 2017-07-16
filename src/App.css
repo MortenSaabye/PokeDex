@@ -41,12 +41,12 @@
 
 .close-wrap {
   position: fixed;
-  top: 30px;
+  top: 20px;
   box-sizing: border-box;
   height: 85px;
   width: 85px;
   display: none;
-  left: 30px;
+  left: 20px;
   text-align: left;
   padding: 20px;
   background: rgba(0, 0, 0, 0.2);
