@@ -20,7 +20,8 @@
     "build": "react-scripts-with-sass build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "api": "./node_modules/.bin/babel-node ./api/api.js"
+    "api": "./node_modules/.bin/babel-node ./api/api.js",
+    "heroku-postbuild": "npm install --only=dev && npm install && npm run build"
   },
   "proxy": "http://localhost:3001"
 }
