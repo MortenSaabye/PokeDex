@@ -1,0 +1,77 @@
+.types, .abilities {
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+  p {
+    text-align: left;
+    &:first-child {
+      flex-basis: 100%;
+      font-size: 1.4em;
+      margin-bottom: 0;
+    }
+    &.type, &.ability  {
+      margin-right: 15px;
+      margin-bottom: 0px;
+      padding: 5px;
+      color: white;
+      border-radius: 5px;
+    }
+  }
+}
+.ability {
+  background: $blue;
+}
+.normal {
+  background: $normal;
+}
+.poison {
+  background: $poison;
+}
+.psychic {
+  background: $psychic;
+}
+.grass{
+  background: $grass;
+}
+.ground {
+  background: $ground;
+}
+.ice {
+  background: $ice;
+}
+.fire {
+  background: $fire;
+}
+.rock {
+  background: $rock;
+}
+.dragon {
+  background: $dragon;
+}
+.water {
+  background: $water;
+}
+.bug {
+  background: $bug;
+}
+.dark {
+  background: $dark;
+}
+.fighting {
+  background: $fighting;
+}
+.ghost {
+  background: $ghost;
+}
+.steel {
+  background: $steel;
+}
+.flying {
+  background: $flying;
+}
+.electric {
+  background: $electric;
+}
+.fairy {
+  background: $fairy;
+}

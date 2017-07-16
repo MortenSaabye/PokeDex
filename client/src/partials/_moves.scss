@@ -1,0 +1,25 @@
+.moves {
+  p {
+    border-bottom: 2px solid $light-blue;
+    display: flex;
+    justify-content:space-between;
+    &:first-child{
+      margin-bottom: 30px;
+      margin-top: 0;
+      border: none;
+      font-size: 1.4em;
+    }
+  }
+}
+
+.number {
+  color:white;
+  background: $blue;
+  border-radius: 3px;
+  padding: 5px;
+  transform: translateY(-5px);
+}
+.label {
+  font-size: 1.1em;
+  padding-bottom: 10px;
+}
